@@ -9,6 +9,7 @@ public abstract class Actor implements Pulse {
   List<Polygon> display;
   boolean bot;
   int moves;
+  int baseMoves;
   int turns;
   MoveStrategy mover;
 
@@ -18,6 +19,7 @@ public abstract class Actor implements Pulse {
     color = inColor;
     bot = isBot;
     moves = inMoves;
+    baseMoves = inMoves;
     turns = 1;
     setPoly();
   }
@@ -46,6 +48,8 @@ public abstract class Actor implements Pulse {
     }
     setPoly();
   }
+
+  public void resetMovesToBase() { moves = baseMoves; }
 
   public void pulsate(char phase, int percentage) {
     // Adjust color saturation according to the beat

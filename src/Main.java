@@ -22,7 +22,7 @@ public class Main extends JFrame {
       public Canvas() {
         setPreferredSize(new Dimension(1024, 720));
         this.addMouseListener(this);
-        stage = StageReader.readStage("data/stage1.rvb");
+        stage = WeatherPlaybackStageReader.readStage("data/stage1.rvb");
       }
 
       @Override

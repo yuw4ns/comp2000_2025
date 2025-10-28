@@ -13,8 +13,27 @@ public class BotMoving implements GameState {
     for(Actor player: s.listOfPlayers) {
       if(player.isBot()) {
         List<Cell> possibleLocs = s.getClearRadius(player.loc, player.moves);
-        int moveBotChooses = (new Random()).nextInt(possibleLocs.size());
-        player.setLocation(possibleLocs.get(moveBotChooses));
+        if(possibleLocs.size() > 0) {
+          // prefer moving with wind direction when available
+          int gx = (player.loc.x - 10) / Cell.size - 10;
+          int gy = (player.loc.y - 10) / Cell.size - 10;
+          double wx = 0.0, wy = 0.0;
+          if(s instanceof WeatherPlaybackStage) {
+            WeatherPlaybackStage w = (WeatherPlaybackStage) s;
+            java.lang.Double vx = w.latestWeather().getOrDefault(new WeatherSubject2.Key(gx, gy, "windx"), 0.0);
+            java.lang.Double vy = w.latestWeather().getOrDefault(new WeatherSubject2.Key(gx, gy, "windy"), 0.0);
+            wx = vx; wy = vy;
+          }
+          Cell best = possibleLocs.get((new Random()).nextInt(possibleLocs.size()));
+          double bestScore = -1e9;
+          for(Cell c: possibleLocs){
+            int cx = (c.x - 10) / Cell.size - 10; int cy = (c.y - 10) / Cell.size - 10;
+            // simple dot product with wind to bias choice
+            double score = (cx-gx)*wx + (cy-gy)*wy + Math.random()*0.1;
+            if(score > bestScore){ bestScore = score; best = c; }
+          }
+          player.setLocation(best);
+        }
       }
     }
     s.currentState = new ChoosingActor();
