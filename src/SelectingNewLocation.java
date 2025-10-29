@@ -31,7 +31,7 @@ public class SelectingNewLocation implements GameState {
 
   @Override
   public void paint(Graphics g, Stage s) {
-    // no paint activity for this GameState
+    
   }
 
   public String toString() {

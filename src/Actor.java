@@ -52,7 +52,7 @@ public abstract class Actor implements Pulse {
   public void resetMovesToBase() { moves = baseMoves; }
 
   public void pulsate(char phase, int percentage) {
-    // Adjust color saturation according to the beat
+    
     float[] hsbValues = new float[3];
     Color.RGBtoHSB(baseColor.getRed(), baseColor.getGreen(), baseColor.getBlue(), hsbValues);
     hsbValues[1] = ((float) percentage) / 100.0f;

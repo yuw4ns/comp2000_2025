@@ -5,7 +5,7 @@ import java.util.Random;
 public class BotMoving implements GameState {
   @Override
   public void mouseClick(int x, int y, Stage s) {
-    // no mouseClick activity for this GameState
+    
   }
 
   @Override
@@ -14,7 +14,7 @@ public class BotMoving implements GameState {
       if(player.isBot()) {
         List<Cell> possibleLocs = s.getClearRadius(player.loc, player.moves);
         if(possibleLocs.size() > 0) {
-          // prefer moving with wind direction when available
+          
           int gx = (player.loc.x - 10) / Cell.size - 10;
           int gy = (player.loc.y - 10) / Cell.size - 10;
           double wx = 0.0, wy = 0.0;
@@ -28,7 +28,7 @@ public class BotMoving implements GameState {
           double bestScore = -1e9;
           for(Cell c: possibleLocs){
             int cx = (c.x - 10) / Cell.size - 10; int cy = (c.y - 10) / Cell.size - 10;
-            // simple dot product with wind to bias choice
+            
             double score = (cx-gx)*wx + (cy-gy)*wy + Math.random()*0.1;
             if(score > bestScore){ bestScore = score; best = c; }
           }

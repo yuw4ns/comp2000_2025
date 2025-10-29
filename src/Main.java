@@ -58,7 +58,7 @@ public class Main extends JFrame {
 
     public void run() {
       while(true) {
-        // Re-draw the screen 50 times per second
+        
         Instant startTime = Instant.now();
         repaint();
         Instant endTime = Instant.now();

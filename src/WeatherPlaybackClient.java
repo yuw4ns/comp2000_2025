@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
- * Reads weather lines from a local file, treating it like a stream.
- * Each call to readBatch() advances by a few lines to simulate realtime.
- */
+
 public class WeatherPlaybackClient {
   private final List<String> allLines;
   private int cursor = 0;
@@ -24,7 +21,7 @@ public class WeatherPlaybackClient {
     this.allLines = lines;
   }
 
-  // Return next N parsed entries (default 8 if not enough left)
+  
   public List<WeatherDatum> readBatch(int n) {
     int end = Math.min(cursor + n, allLines.size());
     List<WeatherDatum> batch = allLines.subList(cursor, end).stream()
@@ -33,12 +30,12 @@ public class WeatherPlaybackClient {
       .map(this::parse)
       .filter(Objects::nonNull)
       .collect(Collectors.toList());
-    cursor = end == cursor ? 0 : end; // loop playback when reaching the end
+    cursor = end == cursor ? 0 : end; 
     return batch;
   }
 
   private WeatherDatum parse(String line) {
-    // timestamp attribute x y value
+    
     String[] p = line.split("\\s+");
     if(p.length != 5) return null;
     try {

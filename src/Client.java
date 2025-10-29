@@ -12,7 +12,7 @@ public class Client {
     public static void main(String[] args) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://13.238.167.130/times"))
+                .uri(URI.create("http:
                 .header("Accept", "text/event-stream")
                 .build();
 
@@ -28,6 +28,6 @@ public class Client {
                         System.err.println("Error reading Server Side Event (SSE) stream: " + e.getMessage());
                     }
                 })
-                .join(); // Wait for the async operation to complete
+                .join(); 
     }
 }

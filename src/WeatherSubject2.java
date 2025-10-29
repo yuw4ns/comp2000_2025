@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Minimal observer for weather playback.
- * Holds most recent values by (x,y,attribute) and notifies listeners each tick.
- */
+
 public class WeatherSubject2 {
   public interface WeatherListener {
     void onWeatherTick(Map<Key, Double> latestByCellAttr,
@@ -29,13 +26,13 @@ public class WeatherSubject2 {
   public void addListener(WeatherListener l){ listeners.add(l); }
 
   public void tick(List<WeatherDatum> batch){
-    // update latest values by (x,y,attr)
+    
     for(WeatherDatum d: batch){ latest.put(new Key(d.x, d.y, d.attribute), d.value); }
-    // compute averages by attribute
+    
     Map<String, Double> avgs = latest.entrySet().stream()
       .collect(Collectors.groupingBy(e -> e.getKey().attr,
         Collectors.averagingDouble(Map.Entry::getValue)));
-    // notify
+    
     for(WeatherListener l: listeners){ l.onWeatherTick(new HashMap<>(latest), avgs); }
   }
 }

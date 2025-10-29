@@ -1,8 +1,8 @@
-# Weather Events Game System
+# COMP2000 Assignment 2
 
 ## Overview
 
-This project extends the week 11 grid game with a weather playback system that drives live overlays and gameplay effects. The data is read as a stream from `data/weather.log` (same format as the server) so the marker can run it offline. It demonstrates design patterns, lambdas and streams end‑to‑end.
+Deriving from the content of week 11, I have added a weather playback system that adds live overlays and gameplay effects. The code reads from 'data/weather.log' as a stream. This is so that the functionallity works even when offline. The code demonstrates design patterns, lambdas and streams.
 
 ## Features
 
@@ -19,6 +19,8 @@ This project extends the week 11 grid game with a weather playback system that d
 
 **Implementation**: `CellWeatherDecorator` wraps each `Cell` and draws blue (rain), gray (storm), orange (heat), or cyan (cold) overlays based on the latest data for that cell.
 
+**Why this shows insight**: The Decorator pattern avoids modifying the stable `Cell` class (Open-Closed Principle). Without it, we'd either subclass Cell for every weather type (inheritance explosion) or add conditional rendering logic directly into Cell (tight coupling). By wrapping, we add new behaviors dynamically at runtime without changing existing code, following composition over inheritance and keeping `Cell` focused solely on its grid responsibilities.
+
 ### 2. Observer Pattern
 **Purpose**: Push each playback "tick" to interested parts of the game.
 
@@ -26,11 +28,7 @@ This project extends the week 11 grid game with a weather playback system that d
 - `WeatherSubject2` aggregates latest values per `(x,y,attribute)` and notifies listeners.
 - `WeatherPlaybackStage` listens and forwards the latest weather map to decorators and actors.
 
-**Benefits**:
-- Loose coupling between weather system and actors
-- Automatic notification of weather events
-- Easy to add new weather-sensitive components
-- Supports multiple observers per event
+**Why this shows insight**: The Observer pattern decouples the weather data producer from consumers (decorators and actors). Without it, every part needing weather data would have to directly query or poll the client, creating tight coupling and duplication. By using a subject/listener model, the weather system remains independent - it doesn't know or care who's listening. New listeners can be added (e.g., sound effects, achievements) without modifying the weather source, demonstrating the Dependency Inversion Principle where high-level modules depend on abstractions, not concrete implementations.
 
 ### 3. Strategy Pattern (rules)
 **Purpose**: Keep weather→effect rules simple and swappable.
@@ -217,4 +215,4 @@ This implementation demonstrates:
 - Comprehensive documentation and code organization
 - Real-time event-driven programming concepts
 
-The weather events system adds significant value beyond the original assignment by creating a dynamic, event-driven game environment that responds to real-world weather conditions with dramatic, engaging gameplay moments!
+With the addition of these features like the weather even system, it shows an insight to the original code by creating a dynamic game environment that corresponds to real world weather conditions with engaging gameplay.

@@ -31,10 +31,10 @@ public class Stage {
   }
 
   public void paint(Graphics g, Point mouseLoc) {
-    // do we have bot moves to make?
+    
     currentState.paint(g, this);
     grid.paint(g, mouseLoc);
-    // Blue cell selection overlay with 50% transparency
+    
     grid.paintOverlay(g, cellOverlay, new Color(0f, 0f, 1f, 0.5f));
 
     beat.ticktock();
@@ -45,14 +45,14 @@ public class Stage {
   }
 
   private void draw_sidepanel(Graphics g, Point mouseLoc) {
-    // lots of magic numbers here
-    // they are used to calculate the coordinates of where to draw on the information panel
+    
+    
     final int hTab = 10;
     final int blockVT = 35;
     final int margin = 21*blockVT;
     int yLoc = 20;
 
-    // state display
+    
     g.setColor(Color.DARK_GRAY);
     g.drawString(currentState.toString(), margin, yLoc);
     yLoc = yLoc + blockVT;
@@ -64,7 +64,7 @@ public class Stage {
       g.drawString(coord, margin, yLoc);
     }
 
-    // agent display
+    
     final int vTab = 15;
     final int labelIndent = margin + hTab;
     final int valueIndent = margin + 3*blockVT;
