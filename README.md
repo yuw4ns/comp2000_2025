@@ -66,46 +66,46 @@ double rain = latest.getOrDefault(new Key(gx, gy, "rain"), 0.0);
 
 ## Weather Event Types
 
-### Flood (visual) 🌊
+### Flood (visual)
 - Trigger: rain > 0.35 — blue tint on cells
 - Human: −1 move (min 1)
 - Bot: 50% chance to skip turn
 
-### Storm ⚡
+### Storm
 - Trigger: sqrt(windx²+windy²) > 0.45 — gray haze
 - Human: no direct change (visual), still affected by other rules
 - Bot: −1 move when wind > 0.6 and wind‑biased pathing
 
-### Heat 🔥
+### Heat
 - Trigger: temp > 0.65 — orange tint
 - Human: if temp > 0.75 → moves halved
 - Bot: if temp > 0.80 → moves forced to 1
 
-### Cold ❄️
+### Cold
 - Trigger: temp < 0.35 — cyan tint
 - Human: if temp < 0.25 → 50% chance to lose turn
 - Bot: if temp < 0.20 → −1 move
 
-### 5. Combined Events 🌪️
+### 5. Combined Events
 - **Trigger**: Multiple severe conditions at same location
 - **Effects**: Severe storm with multiple weather effects
 - **Special**: Longer duration and more dramatic effects
 
 ## Actor Weather Event Responses
 
-### WeatherEventBird 🐦
+### WeatherEventBird
 - **Flood**: Severely affected (additional movement penalty)
 - **Storm**: Can use wind to advantage (increased movement)
 - **Heat Wave**: Sensitive to heat (additional penalty)
 - **Cold Snap**: Very sensitive to cold (severe penalty)
 
-### WeatherEventCat 🐱
+### WeatherEventCat
 - **Flood**: Hates water (severe penalty)
 - **Storm**: Not significantly affected
 - **Heat Wave**: Prefers moderate temperatures (moderate penalty)
 - **Cold Snap**: Somewhat affected by cold (moderate penalty)
 
-### WeatherEventDog 🐕
+### WeatherEventDog
 - **Flood**: Resilient to flooding
 - **Storm**: Not significantly affected
 - **Heat Wave**: Resilient to heat
